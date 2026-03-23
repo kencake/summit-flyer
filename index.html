@@ -8,17 +8,9 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --red: #FF3621;
-      --bg: #FF3621;
-      --border: rgba(255,255,255,0.15);
-      --white: #fff;
-      --muted: rgba(255,255,255,0.65);
-    }
-
     body {
       font-family: 'Inter', sans-serif;
-      background: #e02a15;
+      background: #c02010;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -26,65 +18,96 @@
       padding: 40px 20px;
     }
 
-    /* FLYER — A4 landscape ratio */
     .flyer {
       width: 1122px;
       height: 794px;
-      background: var(--bg);
+      background: #FF3621;
       position: relative;
       overflow: hidden;
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
 
-    /* BACKGROUND ACCENTS */
-    .flyer::before {
-      content: '';
+    /* DOT GRID */
+    .dot-grid {
       position: absolute;
-      top: -120px; left: -120px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(255,54,33,0.12) 0%, transparent 65%);
-      border-radius: 50%;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px);
+      background-size: 28px 28px;
       pointer-events: none;
     }
 
-    .flyer::after {
-      content: '';
+    /* LARGE BG CIRCLE */
+    .bg-circle-1 {
       position: absolute;
-      bottom: -80px; right: 200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      top: -180px; right: -100px;
+      pointer-events: none;
+    }
+
+    .bg-circle-2 {
+      position: absolute;
       width: 360px; height: 360px;
-      background: radial-gradient(circle, rgba(255,54,33,0.07) 0%, transparent 65%);
       border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      top: -60px; right: 80px;
       pointer-events: none;
     }
 
-    /* LEFT SIDE */
+    .bg-circle-3 {
+      position: absolute;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.1);
+      bottom: -60px; left: 200px;
+      pointer-events: none;
+    }
+
+    /* DIAGONAL LINE */
+    .diag-line {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: rgba(255,255,255,0.12);
+      transform: rotate(0deg);
+      pointer-events: none;
+    }
+
+    /* CORNER ACCENT */
+    .corner-tl {
+      position: absolute;
+      top: 32px; left: 32px;
+      width: 48px; height: 48px;
+      border-top: 2px solid rgba(255,255,255,0.4);
+      border-left: 2px solid rgba(255,255,255,0.4);
+      pointer-events: none;
+    }
+
+    .corner-br {
+      position: absolute;
+      bottom: 32px; right: 32px;
+      width: 48px; height: 48px;
+      border-bottom: 2px solid rgba(255,255,255,0.4);
+      border-right: 2px solid rgba(255,255,255,0.4);
+      pointer-events: none;
+    }
+
+    /* LEFT */
     .left {
-      padding: 64px 56px;
+      padding: 56px 52px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border-right: 1px solid var(--border);
       position: relative;
-      z-index: 1;
+      z-index: 2;
+      border-right: 1px solid rgba(255,255,255,0.15);
     }
 
-    .top-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 10px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.8);
-      font-weight: 600;
-    }
-
-    .top-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #fff;
+    .databricks-logo {
+      width: 140px;
     }
 
     .main-title {
@@ -94,175 +117,193 @@
       justify-content: center;
     }
 
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: rgba(255,255,255,0.5);
+    }
+
     .main-title h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: 4.2rem;
-      line-height: 1;
+      font-size: 4.6rem;
+      line-height: 0.95;
       letter-spacing: -2.5px;
-      color: var(--white);
-      margin-bottom: 8px;
+      color: #fff;
     }
 
-    .main-title h1 em {
-      font-style: italic;
-      color: var(--red);
+    .main-title h1 .plus {
+      color: rgba(255,255,255,0.45);
     }
 
-    .main-title .year {
+    .year-line {
       font-family: 'DM Serif Display', serif;
-      font-size: 4.2rem;
-      line-height: 1;
+      font-size: 4.6rem;
+      line-height: 0.95;
       letter-spacing: -2.5px;
       color: transparent;
-      -webkit-text-stroke: 1px rgba(255,255,255,0.25);
+      -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
+      margin-top: 4px;
     }
 
     .tagline {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 320px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
+      max-width: 300px;
       margin-top: 24px;
     }
 
-    .bottom-left {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .invite-from {
+    .bottom-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      padding: 8px 16px;
       font-size: 11px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--muted);
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.5px;
+      width: fit-content;
     }
 
-    .invite-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.4rem;
-      color: var(--white);
-      letter-spacing: -0.5px;
+    .bottom-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #fff;
     }
 
-    .invite-name span { color: var(--red); }
-
-    .invite-role {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* RIGHT SIDE */
+    /* RIGHT */
     .right {
-      padding: 64px 56px;
+      padding: 56px 52px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
-    .event-details {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .detail-row {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .detail-row:last-child { border-bottom: none; padding-bottom: 0; }
-
-    .detail-label {
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--red);
-      font-weight: 600;
-    }
-
-    .detail-value {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem;
-      color: var(--white);
-      letter-spacing: -0.5px;
-      line-height: 1.2;
-    }
-
-    .detail-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    /* STATS ROW */
-    .stats-row {
+    /* STATS */
+    .stats-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
       overflow: hidden;
     }
 
     .stat-cell {
-      background: rgba(0,0,0,0.2);
-      padding: 18px 20px;
-      text-align: center;
+      background: rgba(0,0,0,0.15);
+      padding: 22px 24px;
     }
 
     .stat-cell .num {
       font-family: 'DM Serif Display', serif;
-      font-size: 1.6rem;
-      color: var(--white);
+      font-size: 2.4rem;
+      color: #fff;
       line-height: 1;
       margin-bottom: 4px;
     }
 
-    .stat-cell .num span { color: #fff; }
-
     .stat-cell .lbl {
       font-size: 10px;
-      color: var(--muted);
+      color: rgba(255,255,255,0.6);
       letter-spacing: 1px;
       text-transform: uppercase;
     }
+
+    /* DETAILS */
+    .details {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .detail-row:last-child { border-bottom: none; }
+
+    .detail-icon {
+      width: 36px; height: 36px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .detail-icon svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.8); }
+
+    .detail-info {}
+    .detail-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2px;
+    }
+
+    .detail-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .detail-sub { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 1px; }
 
     /* CTA */
     .cta-block {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 18px 20px;
     }
 
     .cta-text {
-      font-size: 12px;
-      color: var(--muted);
+      font-size: 11px;
+      color: rgba(255,255,255,0.65);
       line-height: 1.6;
-      max-width: 200px;
     }
 
     .cta-btn {
-      display: inline-block;
-      background: #0a0a0a;
-      color: #fff;
-      padding: 12px 24px;
+      background: #fff;
+      color: #FF3621;
+      padding: 10px 18px;
       border-radius: 100px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
       text-decoration: none;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    /* PRINT */
     @media print {
       body { background: none; padding: 0; }
       .flyer { width: 297mm; height: 210mm; }
@@ -272,61 +313,95 @@
 <body>
   <div class="flyer">
 
+    <!-- VISUAL LAYERS -->
+    <div class="dot-grid"></div>
+    <div class="bg-circle-1"></div>
+    <div class="bg-circle-2"></div>
+    <div class="bg-circle-3"></div>
+    <div class="corner-tl"></div>
+    <div class="corner-br"></div>
+
     <!-- LEFT -->
     <div class="left">
-      <div class="top-badge">You're invited</div>
+
+      <!-- Databricks logo SVG -->
+      <svg class="databricks-logo" viewBox="0 0 200 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 0L36 10.4V25.6L18 36L0 25.6V10.4L18 0Z" fill="white" opacity="0.95"/>
+        <path d="M18 6L30 12.8V23.2L18 30L6 23.2V12.8L18 6Z" fill="#FF3621"/>
+        <text x="44" y="26" font-family="Inter, sans-serif" font-weight="700" font-size="18" fill="white" letter-spacing="-0.5">databricks</text>
+      </svg>
 
       <div class="main-title">
-        <h1>Data <em>+</em><br/>AI Summit</h1>
-        <div class="year">2026</div>
-        <p class="tagline">The world's largest data, analytics and AI conference. 800+ sessions, keynotes and hands-on training.</p>
+        <div class="eyebrow">Data + AI Summit</div>
+        <h1>The Future<br/>of <span class="plus">Data</span><br/>&amp; AI</h1>
+        <div class="year-line">2026</div>
+        <p class="tagline">800+ sessions, keynotes and hands-on training. Join thousands of your peers at the world's largest data and AI conference.</p>
       </div>
 
-      <div class="bottom-left">
-        <div class="invite-from">Databricks · EMEA</div>
-      </div>
+      <div class="bottom-badge">San Francisco + Virtual · June 2026</div>
     </div>
 
     <!-- RIGHT -->
     <div class="right">
-      <div class="event-details">
-        <div class="detail-row">
-          <div class="detail-label">When</div>
-          <div class="detail-value">June 15–18, 2026</div>
-          <div class="detail-sub">4 days · In-person + Virtual</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Where</div>
-          <div class="detail-value">Moscone Center</div>
-          <div class="detail-sub">747 Howard Street · San Francisco, CA</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Topics</div>
-          <div class="detail-value" style="font-size: 1rem; font-family: 'Inter', sans-serif; font-weight: 500; line-height: 1.6; color: #aaa;">AI Agents · Data Engineering · Analytics & BI<br/>Governance · App Development · Open Source</div>
-        </div>
-      </div>
 
-      <div class="stats-row">
+      <div class="stats-grid">
         <div class="stat-cell">
-          <div class="num"><span>800</span>+</div>
+          <div class="num">800+</div>
           <div class="lbl">Sessions</div>
         </div>
         <div class="stat-cell">
-          <div class="num"><span>4</span></div>
+          <div class="num">4</div>
           <div class="lbl">Days</div>
         </div>
         <div class="stat-cell">
-          <div class="num"><span>1k</span>s</div>
+          <div class="num">1000s</div>
           <div class="lbl">of Peers</div>
+        </div>
+        <div class="stat-cell">
+          <div class="num">IRL+</div>
+          <div class="lbl">Virtual</div>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="detail-row">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 0 1 7-7zm0 9.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
+          </div>
+          <div class="detail-info">
+            <div class="detail-label">Venue</div>
+            <div class="detail-value">Moscone Center, San Francisco</div>
+            <div class="detail-sub">747 Howard Street · CA</div>
+          </div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+          </div>
+          <div class="detail-info">
+            <div class="detail-label">Date</div>
+            <div class="detail-value">June 15–18, 2026</div>
+            <div class="detail-sub">4 full days of content</div>
+          </div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+          </div>
+          <div class="detail-info">
+            <div class="detail-label">Topics</div>
+            <div class="detail-value">AI Agents · Data Eng · Analytics</div>
+            <div class="detail-sub">Governance · App Dev · Open Source</div>
+          </div>
         </div>
       </div>
 
       <div class="cta-block">
         <p class="cta-text">Reserve your seat and join the conversation shaping the future of data and AI.</p>
-        <div class="cta-btn">databricks.com/dataaisummit</div>
+        <div class="cta-btn">Register Now</div>
       </div>
-    </div>
 
+    </div>
   </div>
 </body>
 </html>
