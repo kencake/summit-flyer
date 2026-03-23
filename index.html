@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data + AI Summit 2026 — Flyer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #FF3621;
+      --bg: #0a0a0a;
+      --border: #1f1f1f;
+      --white: #f5f5f0;
+      --muted: #888;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    /* FLYER — A4 landscape ratio */
+    .flyer {
+      width: 1122px;
+      height: 794px;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* BACKGROUND ACCENTS */
+    .flyer::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: -120px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,54,33,0.12) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .flyer::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: 200px;
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(255,54,33,0.07) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* LEFT SIDE */
+    .left {
+      padding: 64px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    .top-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    .main-title {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .main-title h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 4.2rem;
+      line-height: 1;
+      letter-spacing: -2.5px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .main-title h1 em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    .main-title .year {
+      font-family: 'DM Serif Display', serif;
+      font-size: 4.2rem;
+      line-height: 1;
+      letter-spacing: -2.5px;
+      color: #1f1f1f;
+      -webkit-text-stroke: 1px #333;
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 320px;
+      margin-top: 24px;
+    }
+
+    .bottom-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .invite-from {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .invite-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .invite-name span { color: var(--red); }
+
+    .invite-role {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* RIGHT SIDE */
+    .right {
+      padding: 64px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .event-details {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .detail-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .detail-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    .detail-value {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .detail-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* STATS ROW */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .stat-cell {
+      background: #111;
+      padding: 18px 20px;
+      text-align: center;
+    }
+
+    .stat-cell .num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-cell .num span { color: var(--red); }
+
+    .stat-cell .lbl {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* CTA */
+    .cta-block {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .cta-text {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 200px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* PRINT */
+    @media print {
+      body { background: none; padding: 0; }
+      .flyer { width: 297mm; height: 210mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="flyer">
+
+    <!-- LEFT -->
+    <div class="left">
+      <div class="top-badge">You're invited</div>
+
+      <div class="main-title">
+        <h1>Data <em>+</em><br/>AI Summit</h1>
+        <div class="year">2026</div>
+        <p class="tagline">The world's largest data, analytics and AI conference. 800+ sessions, keynotes and hands-on training.</p>
+      </div>
+
+      <div class="bottom-left">
+        <div class="invite-from">Personal invite from</div>
+        <div class="invite-name">Kenz<span>(AI)</span></div>
+        <div class="invite-role">Business Development Representative, Databricks UAE</div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+      <div class="event-details">
+        <div class="detail-row">
+          <div class="detail-label">When</div>
+          <div class="detail-value">June 15–18, 2026</div>
+          <div class="detail-sub">4 days · In-person + Virtual</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Where</div>
+          <div class="detail-value">Moscone Center</div>
+          <div class="detail-sub">747 Howard Street · San Francisco, CA</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Topics</div>
+          <div class="detail-value" style="font-size: 1rem; font-family: 'Inter', sans-serif; font-weight: 500; line-height: 1.6; color: #aaa;">AI Agents · Data Engineering · Analytics & BI<br/>Governance · App Development · Open Source</div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-cell">
+          <div class="num"><span>800</span>+</div>
+          <div class="lbl">Sessions</div>
+        </div>
+        <div class="stat-cell">
+          <div class="num"><span>4</span></div>
+          <div class="lbl">Days</div>
+        </div>
+        <div class="stat-cell">
+          <div class="num"><span>1k</span>s</div>
+          <div class="lbl">of Peers</div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <p class="cta-text">Reserve your seat and join the conversation shaping the future of data and AI.</p>
+        <div class="cta-btn">databricks.com/dataaisummit</div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
